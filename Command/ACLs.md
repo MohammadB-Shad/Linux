@@ -2,7 +2,7 @@
 This type of situation is what Linux Access Control Lists (ACLs) were intended to resolve. ACLs allow us to apply a more specific set of permissions to a file or directory without (necessarily) changing the base ownership and permissions. They let us "tack on" access for other users or groups.
 
 # Basic Syntax
-The 'setfacl' command in Linux is used to ACLs on files and directories.
+The `setfacl` command in Linux is used to ACLs on files and directories.
 
 ```
 setfacl [option] file_or_directory
