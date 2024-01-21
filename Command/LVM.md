@@ -26,27 +26,34 @@ LVM stands for Logical Volume Manager, and it is a software-based storage manage
   2. Creating Physical Volumes (PV)
      - Use the `pvcreate` command to initialize a disk or partition as a physical volume.
      ```
-     sudo pvcreate /dev/sdX   # Replace /dev/sdX with the appropriate disk or partition
+     sudo pvcreate /dev/sdX   
      ```
+     - Replace /dev/sdX with the appropriate disk or partition
 
   3. Creating Volume Groups (VG)
      - After creating physical volumes, group them together to form a volume group using `vgcreate`.
      ```
-     sudo vgcreate vg_name /dev/sdX1 /dev/sdX2   # Replace vg_name and /dev/sdX* with your desired names and physical volumes
+     sudo vgcreate vg_name /dev/sdX1 /dev/sdX2   
      ```
+     - Replace vg_name and /dev/sdX* with your desired names and physical volumes
 
   4. Creating Logical Volumes (LV)
      - With a volume group in place, you can create logical volumes. Specify the size and name for each logical volume.
      ```
-     sudo lvcreate -L 10G -n lv_name vg_name   # Create a 10GB logical volume named lv_name in volume group vg_name
+     sudo lvcreate -L 10G -n lv_name vg_name   
      ```
+     - Create a 10GB logical volume named lv_name in volume group vg_name
 
   5. Formatting and Mounting Logical Volumes
      - Format the logical volume with a file system of your choice and mount it
      ```
-     sudo mkfs.ext4 /dev/vg_name/lv_name   # Format with ext4, replace with your desired file system
-     sudo mount /dev/vg_name/lv_name /mnt   # Mount the logical volume
+     sudo mkfs.ext4 /dev/vg_name/lv_name
+     ````
+     - Format with ext4, replace with your desired file system
      ```
+     sudo mount /dev/vg_name/lv_name /mnt   
+     ```
+     - Mount the logical volume
 
   6. Displaying LVM Information
      - Use commands like `pvdisplay`, `vgdisplay`, and `lvdisplay` to show information about physical volumes, volume groups, and logical volumes
@@ -59,14 +66,15 @@ LVM stands for Logical Volume Manager, and it is a software-based storage manage
   7. Resizing Logical Volumes
      - You can resize logical volumes as needed
      ```
-     sudo lvresize -L +5G /dev/vg_name/lv_name   # Increase the size by 5GB
+     sudo lvresize -L +5G /dev/vg_name/lv_name   
      ```
+     - Increase the size by 5GB
 
   8. Snapshot Creation
      - Create a snapshot of a logical volume for backup or testing purposes
      ```
-     sudo lvcreate --size 2G --snapshot --name snap_name /dev/vg_name/lv_name   # Create a snapshot
+     sudo lvcreate --size 2G --snapshot --name snap_name /dev/vg_name/lv_name   
      ```
-
+     - Create a snapshot
 
   - These are basic examples, and there are many more features and options available with LVM.
