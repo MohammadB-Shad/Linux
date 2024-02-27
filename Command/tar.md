@@ -1,0 +1,1 @@
+The 'tar' command in linux is used for creating, viewing, extracting, and manipulating tar archives.Tar is a file format and a utility used to collect multiple files into a single archive file, often compressedwith gzip or bzip2. Here are some common uses of the 'tar' command:
