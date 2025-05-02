@@ -25,7 +25,7 @@ else
 fi
 ```
 
-##In Server 1 (MASTER) with More priority No.
+## In Server 1 (MASTER) with More priority No.
 ### Keepalived Config MASTER server (Priority 101)
 vim /etc/keepalived/keepalived.conf
 ```
