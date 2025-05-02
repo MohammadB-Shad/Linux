@@ -29,6 +29,7 @@ global_defs {
 | `smtp_connect_timeout`    | SMTP connection timeout in seconds                  | Integer |
 | `lvs_id`                  | Identifier for the LVS director                     | String  |
 
+
 # Virtual Server Definitions
 ```
 virtual_server 192.168.1.100 80 {
