@@ -1,0 +1,94 @@
+# Keepalived Case Study - Healthcheck
+
+> ⚠️ This content is based on the official Keepalived documentation.  
+> Source: [Keepalived Case Study - Healthcheck](https://keepalived.readthedocs.io/en/latest/case_study_healthcheck.html)
+
+---
+
+## 🧩 Health Check Example
+
+In this example, we configure Keepalived to check the health of a real server by using a TCP-based health check. If the server does not respond, Keepalived will stop forwarding traffic to that server and send a notification email.
+
+### Configuration Example:
+
+```conf
+global_defs {
+    notification_email {
+        admin@example.com
+    }
+    notification_email_from keepalived@example.com
+    smtp_server 127.0.0.1
+    smtp_connect_timeout 30
+    lvs_id LVS_DEVEL
+}
+
+virtual_server 192.168.1.100 80 {
+    delay_loop 6
+    lb_algo rr
+    lb_kind NAT
+    persistence_timeout 50
+    protocol TCP
+
+    sorry_server 192.168.1.254 80
+
+    real_server 192.168.1.101 80 {
+        weight 1
+        TCP_CHECK {
+            connect_port 80
+            connect_timeout 3
+        }
+    }
+
+    real_server 192.168.1.102 80 {
+        weight 2
+        HTTP_GET {
+            url {
+                path /health
+                digest 9e107d9d372bb6826bd81d3542a419d6
+            }
+            connect_port 80
+            connect_timeout 3
+            retry 3
+            delay_before_retry 2
+        }
+    }
+}
+```
+
+---
+
+## 🔹 Case Study: Health Check Keywords
+
+| Keyword              | Description                                                    | Type     |
+|----------------------|----------------------------------------------------------------|----------|
+| `virtual_server`     | Defines a virtual server block                                 | Block    |
+| `delay_loop`         | Interval between health checks in seconds                      | Integer  |
+| `lb_algo`            | Load balancing algorithm (`rr`, `wrr`, `lc`, etc.)             | String   |
+| `lb_kind`            | Load balancing mode (`NAT`, `DR`, `TUN`)                       | String   |
+| `persistence_timeout`| Persistence timeout in seconds                                 | Integer  |
+| `protocol`           | Protocol used (`TCP` or `UDP`)                                 | String   |
+| `sorry_server`       | Fallback server if all real servers are down                   | Address  |
+| `real_server`        | Defines a real server                                          | Block    |
+| `weight`             | Load balancing weight for the real server                      | Integer  |
+| `TCP_CHECK`          | TCP-based health check                                         | Block    |
+| `HTTP_GET`           | HTTP GET-based health check                                    | Block    |
+| `url`                | URL path to request for health checking                        | Block    |
+| `path`               | Path for the HTTP GET request                                  | String   |
+| `digest`             | MD5 hash of the expected HTTP response                         | String   |
+| `connect_port`       | Port to connect for the health check                           | Integer  |
+| `connect_timeout`    | Timeout for connection attempts in seconds                     | Integer  |
+| `retry`              | Number of retries before marking the server as down            | Integer  |
+| `delay_before_retry` | Delay before retrying a failed health check in seconds         | Integer  |
+
+---
+
+## 📌 Notes
+
+- **TCP_CHECK** and **HTTP_GET** are commonly used health check methods.
+- The `delay_loop` keyword determines how frequently Keepalived checks the health of real servers.
+- The `retry` parameter defines the number of retries before a server is considered down.
+
+---
+
+For the most up-to-date case study reference, visit:  
+👉 [https://keepalived.readthedocs.io/en/latest/case_study_healthcheck.html](https://keepalived.readthedocs.io/en/latest/case_study_healthcheck.html)
