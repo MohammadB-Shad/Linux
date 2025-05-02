@@ -50,7 +50,7 @@ vrrp_instance VI_1 {
         auth_pass mypassword
     }
     virtual_ipaddress {
-        192.168.4.100
+        192.168.10.101
     }
     track_script {
         chk_http_port
@@ -81,7 +81,7 @@ vrrp_instance VI_1 {
         auth_pass mypassword
     }
     virtual_ipaddress {
-        192.168.4.100
+        192.168.10.99
     }
     track_script {
         chk_http_port
