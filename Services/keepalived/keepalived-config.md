@@ -20,6 +20,7 @@ global_defs {
 }
 ```
 - Keyword Descriptions:
+```
 | Keyword                   | Description                                         | Type    |
 | ------------------------- | --------------------------------------------------- | ------- |
 | `global_defs`             | Block that contains global settings                 | Block   |
@@ -28,7 +29,7 @@ global_defs {
 | `smtp_server`             | SMTP server used to send notification emails        | String  |
 | `smtp_connect_timeout`    | SMTP connection timeout in seconds                  | Integer |
 | `lvs_id`                  | Identifier for the LVS director                     | String  |
-
+```
 
 # Virtual Server Definitions
 ```
