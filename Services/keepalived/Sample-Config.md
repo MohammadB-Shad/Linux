@@ -1,6 +1,31 @@
 # Setup and configure Keepalived
 We have 2 nginx Servers and we want setup keepalived.
-- In Server 1 (MASTER) with More priority No.
+We need healthcheck script in both Servers.
+```
+vim /opt/healthcheck.sh
+```
+```
+#!/bin/bash
+
+# Define the URL to check
+URL="http://localhost/"
+
+# Make an HTTP GET request and store the response
+RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+
+# Check the HTTP response code
+if [ "$RESPONSE" == "200" ]; then
+    # Server is healthy
+    logger "its ok"
+    exit 0
+else
+    # Server is unhealthy
+    logger "DOWN"
+    exit 1
+fi
+```
+
+##In Server 1 (MASTER) with More priority No.
 ### Keepalived Config MASTER server (Priority 101)
 vim /etc/keepalived/keepalived.conf
 ```
