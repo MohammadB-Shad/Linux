@@ -5,11 +5,50 @@
 
 ---
 
-## 🧩 Health Check Example
+## 🧩 Health Check Overview
 
-In this example, we configure Keepalived to check the health of a real server by using a TCP-based health check. If the server does not respond, Keepalived will stop forwarding traffic to that server and send a notification email.
+In this case study, we walk through configuring Keepalived for a health check setup.
 
-### Configuration Example:
+### Health Check Architecture
+
+```text
+This case study involves the setup of Keepalived in a high availability architecture where multiple web servers are monitored for health.
+```
+
+---
+
+## 🔹 Main Architecture Components
+
+The main components of the architecture in this case study include:
+
+1. **Virtual Server**: The entry point for users.
+2. **Real Servers**: The backend servers serving the actual content.
+3. **Keepalived**: The software that manages the health checks and load balancing.
+
+### Components Overview
+
+| Component          | Description                                                |
+|--------------------|------------------------------------------------------------|
+| Virtual Server     | The IP address that clients access.                        |
+| Real Servers       | Servers that provide the actual content for the clients.   |
+| Keepalived         | Software that monitors the health of the real servers.     |
+
+---
+
+## 🔹 Server Pool Specifications
+
+In this case study, the pool of servers consists of:
+
+- **Server 1**: `192.168.1.101` with TCP health check.
+- **Server 2**: `192.168.1.102` with HTTP-based health check.
+
+Each server is monitored for availability and only healthy servers receive traffic.
+
+---
+
+## 🔹 Keepalived Configuration
+
+The following is the configuration of Keepalived for this architecture:
 
 ```conf
 global_defs {
@@ -55,9 +94,7 @@ virtual_server 192.168.1.100 80 {
 }
 ```
 
----
-
-## 🔹 Case Study: Health Check Keywords
+### Configuration Breakdown:
 
 | Keyword              | Description                                                    | Type     |
 |----------------------|----------------------------------------------------------------|----------|
